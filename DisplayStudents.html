@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Already Registered Students</title>
+        <link rel="stylesheet" href="DisplayStudents.css">
+    </head>
+    <body>
+        <h2>Registered Students!</h2>
+
+        <table id="Table">
+            <thead>
+                <tr> <!-- defines a row within a table -->
+                    <th>ID</th> <!-- defines a column within a table-->
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Project Title</th>
+                    <th>Email Address</th>
+                    <th>Phone Number</th>
+                    <th>Time Chosen</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <script>
+            //this embedded javascript is used to fetch the HTTP request from the js file which is using node.js 
+            fetch('http://localhost:5050/TableRS')
+            .then(response => response.json())
+            .then(data => {
+                const TableData = document.querySelector("#Table tbody");
+                data.forEach(Student => { //data is an array, where in this array we store rows from the database.
+                                        //user (not Users - the name of the table) is a variable/object where it repsents an element from the array - so one row
+                    const row = document.createElement("tr"); //per object.syntax,we get to access a data member (a specific column) from the row within the table
+                    row.innerHTML = `
+                        <td>${Student.ID}</td> 
+                        <td>${Student.FirstName}</td>
+                        <td>${Student.LastName}</td>
+                        <td>${Student.ProjectTitle}</td>
+                        <td>${Student.EmailAddress}</td>
+                        <td>${Student.PhoneNumber}</td>
+                        <td>${Student.Time}</td>
+                    `;
+                    TableData.appendChild(row);
+                });
+            })
+        </script>
+
+    </body>
+</html>

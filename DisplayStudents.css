@@ -1,0 +1,15 @@
+table, th, td{
+    text-align: center;
+    position: relative;
+    border: 1px solid black;
+    margin-top: 30px;
+    border-collapse: collapse;
+}
+
+th{
+    padding: 5px;
+}
+
+html{
+    font-family: Arial
+}

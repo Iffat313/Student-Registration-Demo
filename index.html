@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Registration Webpage</title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <h2>Welcome To Registration Webpage!</h2>
+        <form action="http://localhost:5050/Register" method="POST" id="Form"><!--The attribute action tells the webpage where the user input data should be sent, attribute method says how said data should be sent-->
+            <a href="DisplayStudents.html">Checkout the registered students</a>
+            <label> ID: </label> <!-- We use the value of the name attribute is used to store userunput and send to localhost which is then picked up by backend and then sent to the database-->
+            <input type="text" id="ID" name="ID" required placeholder="########"> <!-- We use the value of the id attribute to directly manipulate a specific user input, for example regex verification, both values for ID & Name attribute are the same as intended!-->
+            <span id="IDError"></span>
+
+            <label> First Name: </label>
+            <input type="text" id="FirstName" name="FirstName" required placeholder="Abc">
+            <span id="FirstNameError"></span>
+
+            <label> Last Name: </label>
+            <input type="text" id="LastName" name="LastName" required placeholder="Xyz">
+            <span id="LastNameError"></span>
+
+            <label> Project Title: </label>
+            <input type="text" id="ProjectTitle" name="ProjectTitle" required placeholder="">
+            <span id="ProjectTileError"></span>
+
+            <label> Email Address: </label>
+            <input type="email" id="EmailAddress" name="EmailAddress" required placeholder="xyz@domain.com">
+            <span id="EmailAddressError"></span>
+
+            <label> Phone Number </label>
+            <input type="tel" name="PhoneNumber" required placeholder="999-999-9999">
+            <span id="PhoneNumberError"></span>
+
+            <label for="Time" required>Choose a Time slot:</label>
+            <select name="Time" id="Time">
+            <span id="Timerror"></span>
+                <option value="4/19/2070, 6:00 PM - 7:00 PM">4/19/2070, 6:00 PM - 7:00 PM</option>
+                <option value="4/19/2070, 7:00 PM - 8:00 PM">4/19/2070, 7:00 PM - 8:00 PM</option>
+                <option value="4/19/2070, 8:00 PM - 9:00 PM">4/19/2070, 8:00 PM - 9:00 PM</option>
+                <option value="4/19/2070, 9:00 PM - 10:00 PM">4/19/2070, 9:00 PM - 10:00 PM</option>
+                <option value="4/19/2070, 10:00 PM - 11:00 PM">4/19/2070, 10:00 PM - 11:00 PM</option>
+                <option value="4/19/2070, 11:00 PM - 12:00 AM">4/19/2070, 11:00 PM - 12:00 AM</option>
+            </select>
+            <button id="SubmitButton">Done</button>
+        </form>
+
+        <script>
+            //this is where we will validate user input via regex: getelementbyid allows us to get the user input for said input element
+            //1. for ID
+            const IDInput = document.getElementById("ID");
+            const IDError = document.getElementById("IDError");
+
+            const IDRegex = /^[0-9]{8}$/; //each char entered must be a number (0-9) must be 8 characters
+            
+            IDInput.addEventListener('input', function() {
+                if(IDRegex.test(IDInput.value)){
+                    IDError.textContent = 'Valid';
+                    IDError.style.color = 'green';
+                }
+                else{
+                    IDError.textContent = `Invalid no letters and you have  (${IDInput.value.length}/8)`;
+                    IDError.style.color = 'red';
+                }
+            });
+
+            //2 for FirstName
+            const FirstNameInput = document.getElementById("FirstName");
+            const FirstNameError = document.getElementById("FirstNameError");
+
+            const FirstNameRegex = /^[a-zA-Z]+$/; //we only want letters as chars
+
+            FirstNameInput.addEventListener('input', function() {
+                
+                if(FirstNameRegex.test(FirstNameInput.value) && FirstNameInput.value.length > 0){
+                    FirstNameError.textContent = 'Valid';
+                    FirstNameError.style.color = 'green';
+                }
+                else{
+                    FirstNameError.textContent = `Invalid, you should only have letters, no spaces, and > 0!`;
+                    FirstNameError.style.color = 'red';
+                }
+            });
+
+            //3 for LastName
+            const LastNameInput = document.getElementById("LastName");
+            const LastNameError = document.getElementById("LastNameError");
+
+            const LastNameRegex = /^[a-zA-Z]+$/; //we only want letters as chars
+            
+            LastNameInput.addEventListener('input', function() {
+                if(LastNameRegex.test(LastNameInput.value) && LastNameInput.value.length>0){
+                    LastNameError.textContent = 'Valid';
+                    LastNameError.style.color = 'green';
+                }
+                else{
+                    LastNameError.textContent = `Invalid, you should only have letters, no spaces, and > 0!`;
+                    LastNameError.style.color = 'red';
+                }
+            });
+
+            //4 for Email 
+            const EmailInput = document.getElementById("EmailAddress");
+            const EmailError = document.getElementById("EmailAddressError");
+
+                                //username     //@ //domain     //extension, must be >=2
+            const EmailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            EmailInput.addEventListener('input', function() {
+                if(EmailRegex.test(EmailInput.value)){
+                    EmailError.textContent = 'Valid';
+                    EmailError.style.color = 'green';
+                }
+                else{
+                    EmailError.textContent = 'Invalid, remember: name@domain.extension';
+                    EmailError.style.color = 'red';
+                }
+            });
+
+        </script>
+
+    </body>
+</html>

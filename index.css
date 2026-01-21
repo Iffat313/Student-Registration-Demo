@@ -1,0 +1,9 @@
+form, a, label, input, span, select, button{
+    display: block;
+    position: relative;
+    margin: 10px;
+}
+
+html{
+    font-family: Arial
+}
